@@ -1,0 +1,31 @@
+.TH CSSCOMPRESS 1 "12 May 2008"
+.SH NAME
+csscompress \- compress CSS code
+.SH SYNOPSIS
+csscompress [-f FILE] [-t FILE]
+.SH DESCRIPTION
+Csscompress is very simple tool which removes non-significant whitespaces and
+comments matched by /\\*\- .* \-\\*/ pattern. Csscompress doesn't remove other
+comments usually used for browser hacking.
+.PP
+csscompress < some_css_file.css > compressed.css
+.SH OPTIONS
+\fB\-h\fR
+show this help
+.TP
+\fB-f\fR file
+read css code from file
+.TP
+\fB-t\fR file
+dump css code to file
+.SH AUTHOR
+Written by Josef Sima.
+.SH REPORTING BUGS
+Report bugs to <michal.bukovsky@firma.seznam.cz>
+.SH COPYRIGHT
+Copyright (C) 2007 Seznam.cz, a.s.
+.br
+This is free software.  You may redistribute copies of it under the terms of
+the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.  There
+is NO WARRANTY, to the extent permitted by law.
+.\" end of man page

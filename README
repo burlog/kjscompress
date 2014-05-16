@@ -1,0 +1,12 @@
+This directory contains the KJS JavaScript compress and CSS compress command
+line tool(kjscompress).
+
+This is free software. See the file COPYING for copying permission.
+
+The tool is based on KDE KJS library included in KDE KHTML library.
+
+Project homepage is at http://kjscompress.sourceforge.net.
+
+Bug reports, patches or feedback of any kind is very welcome.
+
+Michal Bukovsky <michal.bukovsky@firma.seznam.cz>

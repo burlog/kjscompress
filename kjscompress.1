@@ -1,0 +1,69 @@
+.TH KJSCOMPRESS 1 "12 May 2008"
+.SH NAME
+kjscompress \- compress and decompress JavaScript code
+.SH SYNOPSIS
+kjscompress [-f FILE] [-t FILE]
+.br
+kjscompress -d [-f FILE] [-t FILE]
+.SH DESCRIPTION
+Kjscompress removes non-significant whitespaces and comments.  After
+compression kjscompress can validate compressed code and show errors.
+There is support for obfuscating compressed code, but it is in alpha version.
+.PP
+kjscompress < some_javascript_file.js > compressed.js
+.PP
+If you have compressed JavaScript file, kjscompress can make it human
+readable.
+.PP
+kjscompress -d < compressed.js > decompressed.js
+.SH OPTIONS
+.TP
+\fB\-h\fR
+show this help
+.TP
+\fB-f\fR file
+read js code from file
+.TP
+\fB-t\fR file
+dump js code to file
+.TP
+\fB-d\fR
+decompress code
+.TP
+\fB-v\fR
+don't validate generated code
+.TP
+\fB-n\fR
+add newlines to compressed code
+.TP
+\fB-e\fR x
+dump x chars before and after error [30]
+.TP
+\fB-o\fR
+obfuscate identifiers
+.TP
+\fB-c\fR
+write original identifier in comment
+.TP
+\fB-a\fR
+ask to user whether obfuscate identifier
+.TP
+\fB-p\fR prefix
+don't obfuscate identifiers with prefix
+.TP
+\fB-b\fR file
+identifiers obfuscation blacklist
+.TP
+\fB-B\fR file
+append obfuscation blacklist to file
+.SH AUTHOR
+Written by Michal Bukovsky, used code from KDE.
+.SH REPORTING BUGS
+Report bugs to <michal.bukovsky@firma.seznam.cz>
+.SH COPYRIGHT
+Copyright (C) 2007 Seznam.cz, a.s.
+.br
+This is free software.  You may redistribute copies of it under the terms of
+the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.  There
+is NO WARRANTY, to the extent permitted by law.
+.\" end of man page
