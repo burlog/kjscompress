@@ -29,4 +29,4 @@ kjscompress_LDADD = -Lkjs -lkjs
 
 csscompress_SOURCES = css.cc
 
-csscompress_LDADD =
+csscompress_LDADD = 

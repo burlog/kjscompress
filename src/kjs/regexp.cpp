@@ -31,7 +31,9 @@
 
 using namespace KJS;
 
+#ifdef HAVE_PCREPOSIX
 RegExp::UTF8SupportState RegExp::utf8Support = RegExp::Unknown;
+#endif
 
 RegExp::RegExp(const UString &p, int f)
   : pat(p), flgs(f), m_notEmpty(false), valid(true), buffer(0), originalPos(0)
@@ -50,7 +52,7 @@ RegExp::RegExp(const UString &p, int f)
   // JS regexps can contain Unicode escape sequences (\uxxxx) which
   // are rather uncommon elsewhere. As our regexp libs don't understand
   // them we do the unescaping ourselves internally.
-  // Also make sure to expand out any nulls as pcre_compile 
+  // Also make sure to expand out any nulls as pcre_compile
   // expects null termination..
   UString intern;
   const char* const nil = "\\x00";
@@ -108,7 +110,7 @@ RegExp::RegExp(const UString &p, int f)
   if (utf8Support == Supported)
     pcreflags |= PCRE_UTF8;
 
-  // Fill our buffer with an encoded version, whether utf-8, or, 
+  // Fill our buffer with an encoded version, whether utf-8, or,
   // if PCRE is incapable, truncated.
   prepareMatch(intern);
 
@@ -181,7 +183,7 @@ void RegExp::prepareUtf8(const UString& s)
   originalPos = new int[length * 3 + 2];
 
   // Convert to runs of 8-bit characters, and generate indeces
-  // Note that we do NOT combine surrogate pairs here, as 
+  // Note that we do NOT combine surrogate pairs here, as
   // regexps operate on them as separate characters
   char *p      = buffer;
   int  *posOut = originalPos;
@@ -225,8 +227,8 @@ void RegExp::prepareASCII (const UString& s)
   originalPos = 0;
 
   // Best-effort attempt to get something done
-  // when we don't have utf 8 available -- use 
-  // truncated version, and pray for the best 
+  // when we don't have utf 8 available -- use
+  // truncated version, and pray for the best
   CString truncated = s.cstring();
   buffer = new char[truncated.size() + 1];
   memcpy(buffer, truncated.c_str(), truncated.size());
@@ -238,17 +240,22 @@ void RegExp::prepareMatch(const UString &s)
 {
   delete[] originalPos; // Just to be sure..
   delete[] buffer;
+#ifdef HAVE_PCREPOSIX
   if (utf8Support == Supported)
     prepareUtf8(s);
   else
     prepareASCII(s);
+#else
+    prepareASCII(s);
+
+#endif
 
 #ifndef NDEBUG
   originalS = s;
 #endif
 }
 
-void RegExp::doneMatch() 
+void RegExp::doneMatch()
 {
   delete[] originalPos; originalPos = 0;
   delete[] buffer;      buffer      = 0;
@@ -349,12 +356,12 @@ UString RegExp::match(const UString &s, int i, int *pos, int **ovector)
     nrSubPatterns++;
     // if the nonEmpty flag is set, return a failed match if any of the
     // subMatches happens to be an empty string.
-    if (m_notEmpty && rmatch[j].rm_so == rmatch[j].rm_eo) 
+    if (m_notEmpty && rmatch[j].rm_so == rmatch[j].rm_eo)
       return UString::null;
   }
   // Allow an ovector slot to return the (failed) match result.
   if (nrSubPatterns == 0) nrSubPatterns = 1;
-  
+
   int ovecsize = (nrSubPatterns)*3; // see above
   *ovector = new int[ovecsize];
   for (uint j = 0; j < nrSubPatterns; j++) {
