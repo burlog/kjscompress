@@ -1,0 +1,13 @@
+Source: kjscompress
+Priority: extra
+Maintainer: Michal Bukovsky <michal.bukovsky@firma.seznam.cz>
+Build-Depends: debhelper (>=7.0.50), autotools-dev, dh-autoreconf
+Standards-Version: 3.8.4
+
+Package: kjscompress
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, 
+Description:
+        Package contais Javascript compress and obfuscate utitity based od KDE KJS library.
+

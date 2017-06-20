@@ -84,15 +84,15 @@ string_object.lo: string_object.lut.h
 CLEANFILES = $(LUT_FILES)
 
 ## test program (in one program for easier profiling/memory debugging)
-EXTRA_PROGRAMS = testkjs_static
-testkjs_static_SOURCES = testkjs.cpp
-testkjs_static_LDADD = $(LIBPCRE) libkjs.la
-testkjs_static_LDFLAGS = -static
+#EXTRA_PROGRAMS = testkjs_static
+#testkjs_static_SOURCES = testkjs.cpp
+#testkjs_static_LDADD = $(LIBPCRE) libkjs.la
+#testkjs_static_LDFLAGS = -static
 
 ## test program (linked to libkjs)
-check_PROGRAMS = testkjs
-testkjs_SOURCES = testkjs.cpp
-testkjs_LDADD = libkjs.la
+#check_PROGRAMS = testkjs
+#testkjs_SOURCES = testkjs.cpp
+#testkjs_LDADD = libkjs.la
 
 DOXYGEN_REFERENCES = kdecore
 

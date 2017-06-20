@@ -1,9 +1,0 @@
-Package: __PACKAGE__
-Version: __VERSION__
-Architecture: __ARCHITECTURE__
-Depends: __EXTRA_DEPEND__
-Conflicts: szn-util-kjscompress
-Maintainer: __MAINTAINER__
-Installed-Size: __SIZE__
-Description: Javascript compress and obfuscate utitity.
- Package contais Javascript compress and obfuscate utitity based od KDE KJS library.
